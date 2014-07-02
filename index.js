@@ -47,10 +47,10 @@ var actionHash = {
 
   // dump what is stored to stdout
   list: function () {
-    console.log('remembered things:');
-    var i=0, k;
-    for (k in cache) {
-      console.log(i++ + ': ' + k);
+    var files = fs.readdirSync(DATA_DIR);
+    console.log("remembered snippets:");
+    for (var i=0;i<files.length;i++) {
+      console.log( '\t' + files[i]);
     }
   }
 };
@@ -71,8 +71,18 @@ try {
   actionHash[action]();
 } catch (err) {
   //  console.log(err);
-  console.log('ERR',err);
-  console.log('boom <action>s - set, get, forget, list help');
+  switch(err.name) {
+    case "TypeError":
+      // Property 'undefined' of object #<Object> is not a function
+      // console.log(err);
+      break;
+    default:
+      // do nothing special
+  }
+
+  // always output recommended syntax
+  console.log('usage: boom <action> [name] [value]');
+  console.log('    actions: set, get, forget, list, help');
 }
 
 //console.log(action, name, value);
