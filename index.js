@@ -32,16 +32,12 @@ var actionHash = {
   // output value to stdout
   get: function () {
     console.log(fs.readFileSync(getFN(name), {encoding:'utf8'}));
-    /*
-    var value = cache[name];
-    if (value == undefined) throw new Error("value not remebered")
-    console.log(cache[name]);
-    */
   },
 
   // forget value
   forget: function () {
-    delete cache[name];
+    var fn=getFN(name);
+    fs.unlinkSync(fn);
     console.log('okay');
   },
 
@@ -77,10 +73,19 @@ try {
       // console.log(err);
       break;
     default:
+      switch(err.code) {
+      case "ENOENT": // no such file in dir
+          // do nothing
+          console.log('!!! nothing to forget !!!');
+          break;
+      default:
+        console.log("unhandled ERRRR",err);
+      }
       // do nothing special
   }
 
   // always output recommended syntax
+  console.log();
   console.log('usage: boom <action> [name] [value]');
   console.log('    actions: set, get, forget, list, help');
 }
