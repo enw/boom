@@ -25,7 +25,7 @@ var actionHash = {
     var fn=getFN(name);
     fs.writeFile(fn, value, function (err) {
         if (err) throw err;
-        console.log('okay');
+        console.log(name,'saved');
       });
   },
 
@@ -44,6 +44,10 @@ var actionHash = {
   // dump what is stored to stdout
   list: function () {
     var files = fs.readdirSync(DATA_DIR);
+    if (files.length==0) {
+      console.log('no remembered snippets');
+      return;
+    };
     console.log("remembered snippets:");
     for (var i=0;i<files.length;i++) {
       console.log( '\t' + files[i]);
