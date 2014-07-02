@@ -6,17 +6,13 @@
      name = args[1],
      value = args.slice(2).join(" "); // rest
 
-var DATA_DIR = process.env.HOME + '/.boom';
-
-var cache = {
-  name: 'Elliot Winard'
-};
+var DATA_DIR = process.env.HOME + '/.boom_cache';
 
 function getFN(name)  {
   return DATA_DIR+'/'+name;
 };
 
-var actionHash = {
+var actions = {
   help: function () {
     throw new Error('help');
   },
@@ -46,29 +42,40 @@ var actionHash = {
     var files = fs.readdirSync(DATA_DIR);
     if (files.length==0) {
       console.log('no remembered snippets');
-      return;
+    } else {
+      console.log("remembered snippets:");
+      for (var i=0;i<files.length;i++) {
+        console.log( '\t' + files[i]);
+      }
     };
-    console.log("remembered snippets:");
-    for (var i=0;i<files.length;i++) {
-      console.log( '\t' + files[i]);
-    }
+    return files;
   }
 };
 
 // make data dir if it's not already created
 try {
   fs.mkdirSync(DATA_DIR);
+
+  // copy files from template folder to DATA_DIR
+  function getTemplatePath(fn) {
+    return './templates/'+fn;
+  };
+  var files = fs.readdirSync('./templates');
+  for (var i=0;i<files.length;i++) {
+    var fn = files[i];
+    fs.writeFileSync(getFN(fn), fs.readFileSync(getTemplatePath(fn, {encoding:'utf8'})));
+  };
 } catch(err) {
   if (err.code == 'EEXIST') {
     // directory already exists
-
+    // so do mothing
   } else {
     console.log('err',err);
   }
 }
 
 try {
-  actionHash[action]();
+  actions[action]();
 } catch (err) {
   //  console.log(err);
   switch(err.name) {
@@ -93,8 +100,3 @@ try {
   console.log('usage: boom <action> [name] [value]');
   console.log('    actions: set, get, forget, list, help');
 }
-
-//console.log(action, name, value);
-//console.log(argv);
-
-//console.log('cache', cache);
