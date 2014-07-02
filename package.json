@@ -1,0 +1,28 @@
+{
+  "name": "boom",
+  "version": "0.0.0",
+  "description": "remember text.",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enw/boom.git"
+  },
+  "keywords": [
+    "remember",
+    "boom",
+    "text"
+  ],
+  "author": "Elliot Winard <enw@caveteen.com>",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/enw/boom/issues"
+  },
+  "homepage": "https://github.com/enw/boom",
+  "dependencies": {
+    "minimist": "^0.2.0"
+  }
+}
