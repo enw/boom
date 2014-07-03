@@ -12,6 +12,9 @@ API overview
 ```$ boom <name>```
 : remember something from stdin for later
 
+```$ boom edit <name>```
+: edit one of the things you BOOMed
+
 ```$ boom get <name>```
 : write something you have remembered to stdout
 
