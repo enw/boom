@@ -11,6 +11,21 @@ function getFN(name)  {
   return DATA_DIR+'/'+name;
 };
 
+// dump list of rembered items to stdout
+function list () {
+  var files = fs.readdirSync(DATA_DIR);
+  if (files.length==0) {
+    console.log('no remembered snippets');
+  } else {
+    //      console.log('argv', argv);
+    console.log('remembered snippets:');
+    for (var i=0;i<files.length;i++) {
+      console.log( '\t' + files[i]);
+    }
+  };
+  return files;
+};
+
 var actions = {
   // save value from stdin
   set: function () {
@@ -36,7 +51,7 @@ var actions = {
           var fn=getFN(name);
           fs.writeFile(fn, value, function (err) {
               if (err) throw err;
-              console.log(name, 'saved');
+              console.log("'%s' saved", name);
               list();
             });
           done();
@@ -56,23 +71,11 @@ var actions = {
     var name=first,
       fn=getFN(rest);
     fs.unlinkSync(fn);
-    console.log('okay');
+    console.log("'%s' deleted", rest);
   },
 
   // dump what is stored to stdout
-  list: function () {
-    var files = fs.readdirSync(DATA_DIR);
-    if (files.length==0) {
-      console.log('no remembered snippets');
-    } else {
-      //      console.log('argv', argv);
-      console.log('remembered snippets:');
-      for (var i=0;i<files.length;i++) {
-        console.log( '\t' + files[i]);
-      }
-    };
-    return files;
-  }
+  list: list
 };
 
 // make data dir if it's not already created
@@ -107,7 +110,7 @@ try {
 
   // if no args given, list
   if (args.length==0) {
-    return actions.list();
+    return list();
   };
 
   // boom list
@@ -116,7 +119,7 @@ try {
   // boom <name> <value>
   switch (first) {
     case "list":
-      actions.list();
+      list();
       break;
     case "forget":
     case "rm":
