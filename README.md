@@ -9,9 +9,8 @@ overview
 $ boom list
 :list the things you BOOMed
 
-$ boom ```<name>``` ```<value>```
+$ boom ```<name>``` < ```<value>```
 : remember something for later
-
 
 $ boom forget ```<name>```
 : forget something
