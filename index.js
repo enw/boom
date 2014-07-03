@@ -12,9 +12,6 @@ function getFN(name)  {
 };
 
 var actions = {
-  help: function () {
-    throw new Error('help');
-  },
   // save value
   set: function () {
     var name=first, value=rest;
@@ -27,7 +24,7 @@ var actions = {
 
   // output value to stdout
   get: function () {
-    var name=rest;
+    var name=first;
     console.log(fs.readFileSync(getFN(name), {encoding:'utf8'}));
   },
 
@@ -45,6 +42,7 @@ var actions = {
     if (files.length==0) {
       console.log('no remembered snippets');
     } else {
+      //      console.log('argv', argv);
       console.log('remembered snippets:');
       for (var i=0;i<files.length;i++) {
         console.log( '\t' + files[i]);
@@ -77,7 +75,39 @@ try {
 }
 
 try {
-  actions[first]();
+  // handle help
+  if (argv.h || argv.help) {
+    usage();
+    return;
+  };
+
+
+  // if no args given, list
+  if (args.length==0) {
+    return actions.list();
+  };
+
+  // boom list
+  // boom forget <name>
+  // boom <name> <value>
+  // boom <name>
+  switch (first) {
+    case "list":
+      actions.list();
+      break;
+    case "forget":
+      actions.forget();
+      break;
+    default:
+      if (rest) { // get
+        actions.set();
+      } else { // else set
+        actions.get();
+      };
+      break;
+      console.log("OTHER",first, rest);
+      break;
+  }
 } catch (err) {
   //  console.log(err);
   switch(err.name) {
@@ -91,14 +121,22 @@ try {
           // do nothing
         console.log('unable to forget "%s".',rest);
           break;
+      case 'NOARGS':
+        console.log('%s', err.message);
+        break;
       default:
         console.log('unhandled ERRRR',err);
       }
       // do nothing special
   }
 
-  // always output recommended syntax
-  console.log();
-  console.log('usage: boom <action> [name] [value]');
-  console.log('    actions: set, get, forget, list');
+  function usage() {
+    // always output recommended syntax
+    console.log();
+    console.log('usage:');
+    console.log('\t$ boom list');
+    console.log('\t$ boom forget <name>');
+    console.log('\t$ boom <name> <value>');
+    console.log('\t$ boom <name>');
+  };
 }
