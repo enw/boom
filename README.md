@@ -3,18 +3,18 @@ boom
 
 Want to save some text?  BOOM!  Want to remember it?  BOOM!
 
-overview
+API overview
 ---
 
-$ boom list
+```$ boom list```
 :list the things you BOOMed
 
-$ boom ```<name>```
+```$ boom <name>```
 : remember something from stdin for later
 
-$ boom get ```<name>```
-: recall something you remembered
+```$ boom get <name>```
+: write something you have remembered to stdout
 
-$ boom [ forget | rm ] ```<name>```
+```$ boom [ forget | rm ] <name>```
 : forget something
 
