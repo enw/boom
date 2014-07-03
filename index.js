@@ -58,9 +58,9 @@ try {
 
   // copy files from template folder to DATA_DIR
   function getTemplatePath(fn) {
-    return './templates/'+fn;
+    return __dirname+'/templates/'+fn;
   };
-  var files = fs.readdirSync('./templates');
+  var files = fs.readdirSync(__dirname+'/templates');
   for (var i=0;i<files.length;i++) {
     var fn = files[i];
     fs.writeFileSync(getFN(fn), fs.readFileSync(getTemplatePath(fn, {encoding:'utf8'})));
