@@ -11,6 +11,17 @@ function getFN(name)  {
   return DATA_DIR+'/'+name;
 };
 
+// edit
+function edit(done) {
+  if (!process.env.EDITOR) {
+    console.error('EDITOR environment variable must be set');
+    return;
+  }
+  var editor = process.env.EDITOR,
+    fn = getFN(rest);
+  console.log("TODO: edit using w/%s on %s", editor, fn);
+};
+
 // dump list of rembered items to stdout
 function list () {
   var files = fs.readdirSync(DATA_DIR);
@@ -120,6 +131,9 @@ try {
   switch (first) {
     case "list":
       list();
+      break;
+    case "edit":
+      edit();
       break;
     case "forget":
     case "rm":
