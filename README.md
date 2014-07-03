@@ -15,6 +15,6 @@ $ boom ```<name>```
 $ boom get ```<name>```
 : recall something you remembered
 
-$ boom forget ```<name>```
+$ boom [ forget | rm ] ```<name>```
 : forget something
 

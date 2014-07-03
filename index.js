@@ -114,7 +114,7 @@ try {
   };
 
   // boom list
-  // boom forget <name>
+  // boom [ forget | rm ] <name>
   // boom get <name>
   // boom <name> <value>
   switch (first) {
@@ -159,8 +159,8 @@ try {
     console.log();
     console.log('usage:');
     console.log('\t$ boom list');
+    console.log('\t$ boom get <name>');
     console.log('\t$ boom [ forget | rm ] <name>');
-    console.log('\t$ boom forget <name>');
     console.log('\t$ boom <name> <value>');
     console.log('\t$ boom <name>');
   };
