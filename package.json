@@ -4,7 +4,7 @@
   "description": "CLI app to remember snippets of text.",
   "main": "index.js",
   "bin": {
-    "boom": "index.js"
+    "boom": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
