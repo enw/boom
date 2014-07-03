@@ -1,9 +1,11 @@
 {
   "name": "boom-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "CLI app to remember snippets of text.",
   "main": "index.js",
-  "bin": {"boom":"index.js"},
+  "bin": {
+    "boom": "index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
