@@ -12,19 +12,42 @@ function getFN(name)  {
 };
 
 var actions = {
-  // save value
+  // save value from stdin
   set: function () {
-    var name=first, value=rest;
-    var fn=getFN(name);
-    fs.writeFile(fn, value, function (err) {
-        if (err) throw err;
-        console.log(name,'saved');
-      });
+    console.log('starting read from stdin...');
+
+    // asynchronously get value
+    // done() takes err, data
+    function getValue(done) {
+      process.stdin.setEncoding('utf8');
+
+      var value = "";
+      // collect data from stdin
+      process.stdin.on('readable', function() {
+          var chunk = process.stdin.read();
+          if (chunk !== null) {
+            value += chunk;
+          }
+        });
+
+      // write data to file
+      process.stdin.on('end', function() {
+          var name=first;
+          var fn=getFN(name);
+          fs.writeFile(fn, value, function (err) {
+              if (err) throw err;
+              console.log(name, 'saved');
+              list();
+            });
+          done();
+        });
+    };
+    getValue(function(d) {});
   },
 
   // output value to stdout
   get: function () {
-    var name=first;
+    var name=rest;
     console.log(fs.readFileSync(getFN(name), {encoding:'utf8'}));
   },
 
@@ -89,8 +112,8 @@ try {
 
   // boom list
   // boom forget <name>
+  // boom get <name>
   // boom <name> <value>
-  // boom <name>
   switch (first) {
     case "list":
       actions.list();
@@ -98,14 +121,11 @@ try {
     case "forget":
       actions.forget();
       break;
-    default:
-      if (rest) { // get
-        actions.set();
-      } else { // else set
-        actions.get();
-      };
+    case "get":
+      actions.get();
       break;
-      console.log("OTHER",first, rest);
+    default:
+      actions.set();
       break;
   }
 } catch (err) {

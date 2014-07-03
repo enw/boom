@@ -9,13 +9,12 @@ overview
 $ boom list
 :list the things you BOOMed
 
-$ boom ```<name>``` < ```<value>```
-: remember something for later
+$ boom ```<name>```
+: remember something from stdin for later
+
+$ boom get ```<name>```
+: recall something you remembered
 
 $ boom forget ```<name>```
 : forget something
 
-$ boom ```<name>```
-: recall something you remembered
-
-## examples
