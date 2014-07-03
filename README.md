@@ -13,7 +13,7 @@ API overview
 : remember something from stdin for later
 
 ```$ boom edit <name>```
-: edit one of the things you BOOMed
+: edit one of the things you BOOMed with your $EDITOR
 
 ```$ boom get <name>```
 : write something you have remembered to stdout

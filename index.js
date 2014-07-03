@@ -18,8 +18,12 @@ function edit(done) {
     return;
   }
   var editor = process.env.EDITOR,
-    fn = getFN(rest);
-  console.log("TODO: edit using w/%s on %s", editor, fn);
+    fn = getFN(rest),
+    editor = require('editor');
+    editor(fn, function(code,sig) {
+        if (done) done();
+        //      console.log('finished editoring with code '+code, sig);
+    });
 };
 
 // dump list of rembered items to stdout
