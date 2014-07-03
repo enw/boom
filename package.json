@@ -1,6 +1,6 @@
 {
   "name": "boom-cli",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "CLI app to remember snippets of text.",
   "main": "index.js",
   "bin": {
