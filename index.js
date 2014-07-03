@@ -119,6 +119,7 @@ try {
       actions.list();
       break;
     case "forget":
+    case "rm":
       actions.forget();
       break;
     case "get":
@@ -155,6 +156,7 @@ try {
     console.log();
     console.log('usage:');
     console.log('\t$ boom list');
+    console.log('\t$ boom [ forget | rm ] <name>');
     console.log('\t$ boom forget <name>');
     console.log('\t$ boom <name> <value>');
     console.log('\t$ boom <name>');
