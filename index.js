@@ -22,7 +22,7 @@ function output(s) {
     console.log(s);
     break;
   case outputType.FILE:
-    console.log('TODO: output string to %s', outputStyle.filename);
+    fs.writeFileSync(outputStyle.filename, s);
     break;
   default:
     console.log('ERROR : unknown output type', oututStyle.type);
