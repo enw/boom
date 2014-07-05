@@ -26,6 +26,7 @@
   "homepage": "https://github.com/enw/boom",
   "dependencies": {
     "editor": "^0.1.0",
-    "minimist": "^0.2.0"
+    "minimist": "^0.2.0",
+    "sprintf": "^0.1.3"
   }
 }

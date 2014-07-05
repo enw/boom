@@ -1,9 +1,34 @@
 #!/usr/bin/env node
-  var fs = require('fs'),
-     argv = require('minimist')(process.argv.slice(2)),
+var fs = require('fs'),
+     sprintf = require('sprintf').sprintf;
+
+var  argv = require('minimist')(process.argv.slice(2)),
      args = argv._,
      first = args[0],
      rest = args.slice(1).join(' '); // rest
+
+// {type:stdout}, {type:file,filename:<filename>}
+var outputType = { STDOUT: 'stdout', FILE: 'file' };
+var outputStyle = { type: outputType.STDOUT };
+if (argv['o'] && argv['o'] != true) {
+  outputStyle.type = outputType.FILE;
+  outputStyle.filename = argv.o;
+}
+
+function output(s) {
+  //console.log('OUTPUT', outputStyle);
+  switch (outputStyle.type) {
+  case outputType.STDOUT:
+    console.log(s);
+    break;
+  case outputType.FILE:
+    console.log('TODO: output string to %s', outputStyle.filename);
+    break;
+  default:
+    console.log('ERROR : unknown output type', oututStyle.type);
+  }
+};
+  //console.log(outputStyle);
 
 var DATA_DIR = process.env.HOME + '/.boom_cache';
 
@@ -22,7 +47,6 @@ function edit(done) {
     editor = require('editor');
     editor(fn, function(code,sig) {
         if (done) done();
-        //      console.log('finished editoring with code '+code, sig);
     });
 };
 
@@ -78,7 +102,7 @@ var actions = {
   // output value to stdout
   get: function () {
     var name=rest;
-    console.log(fs.readFileSync(getFN(name), {encoding:'utf8'}));
+    output(fs.readFileSync(getFN(name), {encoding:'utf8'}));
   },
 
   // forget value
