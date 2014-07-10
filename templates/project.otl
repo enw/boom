@@ -1,0 +1,51 @@
+SYNOPSIS
+steps & activities needed to bring a project to life
+
+NOT ADDRESSED
+business analysis
+
+* Discover
+** Stakeholder Interviews
+** Comparative & Competitive Analysis
+** Assess Capabilities
+** Assess Technologies
+** Map Ecosystem
+** Generate Initial Requirements
+* Envisioning - "just enough" modeling
+** Conceptual Tech Stack Diagram
+*** UI Layer
+*** Business Layer
+*** Data Layer
+** Deployment Diagram (UML)
+*** physical components/servers w/{technical constraints} (if any)
+*** connections are <<annotated>> if appropriate
+** UI flows
+** Domain Models
+** Risk Assessment
+*** what is the risk?
+*** mitigation strategies
+* Development Prep
+** Vendor 
+** Infrastructure Set-up & Documentation
+*** Source Control
+*** Bug Tracker
+*** Agile tools?
+*** Hosting environments
+** Technical POCs - a technical design activity
+** UX Prototyping - a design activity
+* Iteratively Develop Each Project
+** Sprint 0 
+*** Release Plan - how many products? in what order? skills needed? MVP? MLP?
+*** Initial back-log
+*** Stubbed-out build of architecture
+*** Agile Manifesto Review
+**** Individuals and Interactions over Process and Tools
+**** Working Software over Comprehensive Docmentation
+**** Customer Collaboration over Contract Negotiation
+**** Responding to Change over Following a Plan
+** Sprint 1...N
+*** Agree on backlog
+*** Don't work during stand-ups
+*** Write automated tests
+*** Get stuff done
+
